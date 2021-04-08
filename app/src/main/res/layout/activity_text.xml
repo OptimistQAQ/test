@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.TextActivity">
+
+    <TextView
+        android:id="@+id/text_view_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="测试文字，测试文字！"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="#000000" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:text="颜色"
+            android:textSize="20sp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"/>
+
+        <Button
+            android:id="@+id/btn_red"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:text="红色"/>
+
+        <Button
+            android:id="@+id/btn_green"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:text="绿色"/>
+
+        <Button
+            android:id="@+id/btn_blue"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:text="蓝色"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:text="大小"
+            android:textSize="20sp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"/>
+
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:text="增大"/>
+
+        <Button
+            android:id="@+id/btn_cut"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:text="减小"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:text="样式"
+            android:textSize="20sp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"/>
+
+        <Button
+            android:id="@+id/btn_bold"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:text="加粗"/>
+
+        <Button
+            android:id="@+id/btn_slope"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:text="倾斜"/>
+
+        <Button
+            android:id="@+id/btn_origin"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:text="默认"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:text="内容"
+            android:textSize="20sp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"/>
+
+        <EditText
+            android:id="@+id/edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="请输入内容"
+            android:gravity="center_vertical"
+            android:minLines="2"/>
+
+    </LinearLayout>
+
+</LinearLayout>

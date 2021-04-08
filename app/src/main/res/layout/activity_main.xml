@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="简易文本编辑器"
+        android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/order_food_demo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="移动点餐系统"
+        android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/test_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="打开百度.com"
+        android:textSize="20sp"
+        tools:ignore="HardcodedText"
+        android:textAllCaps="false"/>
+
+
+
+
+    <Button
+        android:id="@+id/chuandi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Activity传递数据"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="弹出对话框"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        tools:ignore="HardcodedText" />
+
+
+
+</LinearLayout>
