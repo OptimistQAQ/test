@@ -22,7 +22,7 @@ public class LoginDialog extends Dialog {
 	public Button mbtnRegister=null;
 
 	public LoginDialog(Context context) {
-		super(context);
+		super(context, R.style.Dialog);
 		setContentView(R.layout.login);
 		this.setTitle("用户登录");
 		setCancelable(true);
