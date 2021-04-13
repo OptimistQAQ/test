@@ -7,8 +7,7 @@ import java.util.ArrayList;
 /**
  * @author 65667
  */
-public class Dishes
-{
+public class Dishes {
 	public ArrayList<Dish> mDishes;  //菜品列表
 	
 	public int GetDishQuantity()

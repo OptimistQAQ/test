@@ -159,8 +159,7 @@ public class OrderFoodActivity extends AppCompatActivity {
                     loginDlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
                         public void onDismiss(DialogInterface dialog) {
-                            switch (loginDlg.mBtnClicked)
-                            {
+                            switch (loginDlg.mBtnClicked) {
                                 case BUTTON_OK://用户点击了“确定”按钮
                                     //判断用户名及密码是否符合
                                     MyApplication appInstance = (MyApplication)getApplication();
@@ -197,13 +196,11 @@ public class OrderFoodActivity extends AppCompatActivity {
                     });
                     return;
                 case R.id.imgBtnUserInfo:
-                    if (!mAppInstance.g_user.mIslogined)
-                    {
+                    if (!mAppInstance.g_user.mIslogined) {
                         //用户未登录,提示用户登录
                         Toast.makeText(OrderFoodActivity.this, "请先登录!", Toast.LENGTH_LONG).show();
                     }
-                    else
-                    {
+                    else {
                         //用户已登录，跳转到个人信息页面
                         Intent intent = new Intent(OrderFoodActivity.this, UserInfoActivity.class);
                         startActivity(intent);
@@ -243,6 +240,8 @@ public class OrderFoodActivity extends AppCompatActivity {
             default:break;
         }
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

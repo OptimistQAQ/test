@@ -10,8 +10,7 @@ import com.example.test.R;
 /**
  * @author 65667
  */
-public class OrderOneDialog  extends Dialog
-{
+public class OrderOneDialog  extends Dialog {
 	public enum ButtonID {BUTTON_NONE, BUTTON_OK, BUTTON_CANCEL};
 	
 	public int mNum = 0; //订购数量
