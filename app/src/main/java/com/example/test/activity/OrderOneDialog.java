@@ -18,7 +18,7 @@ public class OrderOneDialog  extends Dialog {
 	public Button mbtnOK=null;
 	
 	public OrderOneDialog(Context context) {
-		super(context);
+		super(context, R.style.Dialog);
 		setContentView(R.layout.orderonedialog);
 		setCancelable(true);
 		

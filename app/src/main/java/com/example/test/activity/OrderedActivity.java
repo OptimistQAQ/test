@@ -1,11 +1,14 @@
 package com.example.test.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -33,6 +36,8 @@ public class OrderedActivity extends Activity {
 
     public TextView mtvTotalPrice = null;
 
+    private Button mBtnSubmit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,14 @@ public class OrderedActivity extends Activity {
         setContentView(R.layout.activity_ordered);
         mtvTotalPrice = (TextView)findViewById(R.id.ordertotalprice);
         mlistview = (ListView) findViewById(R.id.OrderedListview);
+        mBtnSubmit = (Button) findViewById(R.id.submit_ok);
+
+        mBtnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(OrderedActivity.this, "暂未实现", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //设置ListView选项点击监听器
         this.mlistview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -116,8 +129,7 @@ public class OrderedActivity extends Activity {
         UpdateOrderList();
     }
 
-    private void UpdateOrderList()
-    {
+    private void UpdateOrderList() {
         morderedinfo=getOrderedDishData();
         //SimpleAdapter适配器，将它和自定义的布局文件、List数据源关联
         mlistItemAdapter = new SimpleAdapter(this,morderedinfo,//数据源
@@ -137,5 +149,7 @@ public class OrderedActivity extends Activity {
         String dd=fnum.format(tf);
         mtvTotalPrice.setText(dd);
     }
+
+
 
 }
