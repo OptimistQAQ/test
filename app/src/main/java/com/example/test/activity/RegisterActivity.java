@@ -45,6 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
                         String strPsword = metPsword.getText().toString();
                         String strAffirmPsword = metAffirmPsword.getText().toString();
                         if (strPsword.equals(strAffirmPsword)) {
+                            Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
                             //通过Intent将用户注册信息返回给父Activity，这里即MainActivity.
                             Uri info = Uri.parse("用户注册信息");
                             Intent intentUserInfo = new Intent(null, info);
