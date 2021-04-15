@@ -96,8 +96,7 @@ public class OrderedActivity extends Activity {
         });
     }
 
-    private ArrayList<Map<String, Object>> getOrderedDishData()
-    {
+    private ArrayList<Map<String, Object>> getOrderedDishData() {
         ArrayList<Map<String, Object>> orderDishData=new ArrayList<Map<String,Object>>();
         //将菜品信息填充进foodinfo列表
         MyApplication appInstance = (MyApplication)getApplication();
