@@ -51,6 +51,15 @@
         android:textSize="20sp"
         tools:ignore="HardcodedText" />
 
+    <Button
+        android:id="@+id/share"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Share存储数据"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        tools:ignore="HardcodedText" />
+
 
 
 </LinearLayout>

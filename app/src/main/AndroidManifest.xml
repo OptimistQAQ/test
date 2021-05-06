@@ -16,7 +16,8 @@
         android:roundIcon="@drawable/main"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.chaundi.CaculateActivity"></activity>
+        <activity android:name=".activity.data.SharedPreferencesActivity"></activity>
+        <activity android:name=".activity.chaundi.CaculateActivity" />
         <activity android:name=".activity.chaundi.ChuandiActivity" />
         <activity android:name=".activity.url.UrlActivity" />
         <activity

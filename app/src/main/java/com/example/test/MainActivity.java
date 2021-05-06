@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.test.activity.OrderFoodActivity;
 import com.example.test.activity.TextActivity;
 import com.example.test.activity.chaundi.ChuandiActivity;
+import com.example.test.activity.data.SharedPreferencesActivity;
 import com.example.test.activity.url.UrlActivity;
 
 /**
@@ -22,7 +23,7 @@ import com.example.test.activity.url.UrlActivity;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private Button text_Button, order_Food, btn_url, btn_Chuandi, bt_dialog;
+    private Button text_Button, order_Food, btn_url, btn_Chuandi, bt_dialog, bt_share;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         btn_url = (Button) findViewById(R.id.test_url);
         btn_Chuandi = (Button) findViewById(R.id.chuandi);
         bt_dialog = (Button) findViewById(R.id.dialog);
+        bt_share = (Button) findViewById(R.id.share);
         text_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +104,14 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, loginDialog.username, Toast.LENGTH_LONG).show();
                     }
                 });
+            }
+        });
+
+        bt_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shareIntent = new Intent(MainActivity.this, SharedPreferencesActivity.class);
+                startActivity(shareIntent);
             }
         });
     }
