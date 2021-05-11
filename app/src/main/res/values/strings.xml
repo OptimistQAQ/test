@@ -8,6 +8,7 @@
     <string name="title_activity_caipin">CaipinActivity</string>
     <string name="title_activity_ordered">OrderedActivity</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="action_setting">设置</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

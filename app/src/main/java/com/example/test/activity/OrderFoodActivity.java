@@ -20,6 +20,8 @@ import com.example.test.bean.Dishes;
 import com.example.test.bean.MyUser;
 import com.example.test.bean.Order;
 import com.example.test.bean.ShoppingCart;
+import com.example.test.utils.DBAdapter;
+import com.example.test.utils.DataFileAccess;
 import com.example.test.utils.Dish;
 import com.example.test.utils.MyApplication;
 
@@ -32,8 +34,12 @@ public class OrderFoodActivity extends AppCompatActivity {
 
     private static final int REGISTERACTIVITY = 1; //设置注册Activity的请求码
     private static MyApplication mAppInstance; //用来访问程序全局变量
+    private static String mUserFileName ="UserInfo";//定义SharedPreferences数据文件名称
 
     public ImageButton mImgBtnLogin, mImgBtnLogout;
+
+    //文件访问对象
+    private DataFileAccess mDFA = new DataFileAccess(OrderFoodActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,19 @@ public class OrderFoodActivity extends AppCompatActivity {
         mAppInstance.g_orders = new ArrayList<Order>();//创建订单列表
         mAppInstance.g_dishes = new Dishes();
         mAppInstance.g_dishes.mDishes =	FillDishesList(); //填充菜品列表
+        mAppInstance.g_user = mDFA.ReadUserInfofromFile("userinfo.txt");
+        if (mAppInstance.g_user == null) {
+            mAppInstance.g_user = new MyUser(); //读入失败则创建新用户
+        }
+        mAppInstance.g_orders = new ArrayList<Order>();//创建订单列表
+        CopyDishImagesFromRawToSD(); //将RAW文件夹中的菜品图像复制到SD卡的指定文件夹中
+
+        mAppInstance.g_dbAdepter = new DBAdapter(this);
+        mAppInstance.g_dbAdepter.open();
+        mAppInstance.g_dbAdepter.deleteAllData();//清除原有菜品数据
+        ArrayList<Dish> dishes = FillDishesList(); //将菜品列表保存在内存dishes表中
+        //将菜品从dishes表中填充进数据库
+        mAppInstance.g_dbAdepter.FillDishTable(dishes);
 
         ImageButton imgBtnRest = (ImageButton)findViewById(R.id.imgBtnRest);
         ImageButton imgBtnTakeout = (ImageButton)findViewById(R.id.imgBtnTakeout);
@@ -62,7 +81,40 @@ public class OrderFoodActivity extends AppCompatActivity {
         mImgBtnLogout.setOnClickListener(new myImageButtonListener());
     }
 
+    private boolean CopyDishImagesFromRawToSD() {
+        if (mDFA.SDCardState())//检查SD卡是否可用
+        {
+            //在SD卡中创建存放菜品图像的指定文件夹
+            if (!mDFA.isFileExist(mAppInstance.g_imgDishImgPath)) {
+                //文件夹不存在，创建文件夹
+                mDFA.createSDDir(mAppInstance.g_imgDishImgPath);
+            }
+            //依次将将raw文件夹中的菜品图像依次复制到SD卡的指定文件夹中
+            String strDishImgName = mAppInstance.g_imgDishImgPath + "/" + "food01gongbaojiding.jpg";
+            if (!(mDFA.isFileExist(strDishImgName)))
+                //将raw文件夹中的food01gongbaojiding.jpg文件拷贝至SD卡指定文件夹中
+                mDFA.CopyRawFilestoSD(R.raw.food01gongbaojiding, strDishImgName);
+            strDishImgName = mAppInstance.g_imgDishImgPath + "/" + "food02jiaoyanyumi.jpg";
+            if (!(mDFA.isFileExist(strDishImgName)))
+                //将raw文件夹中的food02jiaoyanyumi.jpg文件拷贝至SD卡指定文件夹中
+                mDFA.CopyRawFilestoSD(R.raw.food02jiaoyanyumi, strDishImgName);
+            strDishImgName = mAppInstance.g_imgDishImgPath + "/" + "food03qingzhengwuchangyu.jpg";
+            if (!(mDFA.isFileExist(strDishImgName)))
+                //将raw文件夹中的food03qingzhengwuchangyu.jpg文件拷贝至SD卡指定文件夹中
+                mDFA.CopyRawFilestoSD(R.raw.food03qingzhengwuchangyu, strDishImgName);
+            strDishImgName = mAppInstance.g_imgDishImgPath + "/" + "food04yuxiangrousi.jpg";
+            if (!(mDFA.isFileExist(strDishImgName)))
+                //将raw文件夹中的food04yuxiangrousi.jpg文件拷贝至SD卡指定文件夹中
+                mDFA.CopyRawFilestoSD(R.raw.food04yuxiangrousi, strDishImgName);
+
+            return true;
+        }
+        return false;
+    }
+
     private ArrayList<Dish> FillDishesList() {
+
+        String imgPath = mDFA.SDCardPath() + "/" + mAppInstance.g_imgDishImgPath + "/";
         ArrayList<Dish> theDishesList = new ArrayList<Dish>();
         Dish theDish = new Dish();
         //添加菜品
@@ -70,6 +122,7 @@ public class OrderFoodActivity extends AppCompatActivity {
         theDish.mName = "宫保鸡丁";
         theDish.mPrice = (float) 20.0;
         theDish.mImage = (R.raw.food01gongbaojiding);
+        theDish.mImageName = imgPath + "food01gongbaojiding.jpg";
         theDishesList.add(theDish);
 
         theDish = new Dish();
@@ -77,6 +130,7 @@ public class OrderFoodActivity extends AppCompatActivity {
         theDish.mName = "椒盐玉米";
         theDish.mPrice = (float) 24.0;
         theDish.mImage = (R.raw.food02jiaoyanyumi);
+        theDish.mImageName = imgPath + "food02jiaoyanyumi.jpg";
         theDishesList.add(theDish);
 
         theDish = new Dish();
@@ -84,6 +138,7 @@ public class OrderFoodActivity extends AppCompatActivity {
         theDish.mName = "清蒸武昌鱼";
         theDish.mPrice = (float) 48.0;
         theDish.mImage = (R.raw.food03qingzhengwuchangyu);
+        theDish.mImageName = imgPath + "food03qingzhengwuchangyu.jpg";
         theDishesList.add(theDish);
 
         theDish = new Dish();
@@ -91,8 +146,40 @@ public class OrderFoodActivity extends AppCompatActivity {
         theDish.mName = "鱼香肉丝";
         theDish.mPrice = (float) 20.0;
         theDish.mImage = (R.raw.food04yuxiangrousi);
+        theDish.mImageName = imgPath + "food04yuxiangrousi.jpg";
         theDishesList.add(theDish);
         return theDishesList;
+
+//        ArrayList<Dish> theDishesList = new ArrayList<Dish>();
+//        Dish theDish = new Dish();
+//        //添加菜品
+//        theDish.mId = 1001;
+//        theDish.mName = "宫保鸡丁";
+//        theDish.mPrice = (float) 20.0;
+//        theDish.mImage = (R.raw.food01gongbaojiding);
+//        theDishesList.add(theDish);
+//
+//        theDish = new Dish();
+//        theDish.mId = 1002;
+//        theDish.mName = "椒盐玉米";
+//        theDish.mPrice = (float) 24.0;
+//        theDish.mImage = (R.raw.food02jiaoyanyumi);
+//        theDishesList.add(theDish);
+//
+//        theDish = new Dish();
+//        theDish.mId = 1003;
+//        theDish.mName = "清蒸武昌鱼";
+//        theDish.mPrice = (float) 48.0;
+//        theDish.mImage = (R.raw.food03qingzhengwuchangyu);
+//        theDishesList.add(theDish);
+//
+//        theDish = new Dish();
+//        theDish.mId = 1004;
+//        theDish.mName = "鱼香肉丝";
+//        theDish.mPrice = (float) 20.0;
+//        theDish.mImage = (R.raw.food04yuxiangrousi);
+//        theDishesList.add(theDish);
+//        return theDishesList;
     }
 
     public class myImageButtonListener implements View.OnClickListener {
@@ -101,13 +188,11 @@ public class OrderFoodActivity extends AppCompatActivity {
             switch (v.getId())
             {
                 case R.id.imgBtnRest:
-                    if (!mAppInstance.g_user.mIslogined)
-                    {
+                    if (!mAppInstance.g_user.mIslogined) {
                         //用户未登录,提示用户登录
                         Toast.makeText(OrderFoodActivity.this, "请先登录!", Toast.LENGTH_LONG).show();
                     }
-                    else
-                    {
+                    else {
                         //用户已登录
                         //清空上次桌号
                         mAppInstance.g_user.mSeatname = "";
@@ -119,8 +204,7 @@ public class OrderFoodActivity extends AppCompatActivity {
                         Button btnOK = (Button)dialog.findViewById(R.id.btnOK);
                         final EditText etSeatId = (EditText)dialog.findViewById(R.id.etSeatId);
                         dialog.show();
-                        btnOK.setOnClickListener(new View.OnClickListener()
-                        {
+                        btnOK.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 MyApplication appInstance = (MyApplication)getApplication();
@@ -254,6 +338,8 @@ public class OrderFoodActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_exit:
+                break;
+            case R.id.action_setting:
                 break;
         }
         return super.onOptionsItemSelected(item);

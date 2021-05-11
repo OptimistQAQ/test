@@ -28,6 +28,9 @@ public class MyApplication extends Application { //该类用于保存全局变�
     public int g_objPort=35885;    //店面服务器监听端口号
     public Context g_context;
 
+    public DBAdapter g_dbAdepter = null; //数据库辅助对象
+    public String g_imgDishImgPath="Android/data/edu.cqut.mobileorderfood/img"; //菜品图片路径
+
     //获取检查WiFi是否可用
     public boolean isWifiEnabled(Context context) {
         //获得WIFI管理对象
