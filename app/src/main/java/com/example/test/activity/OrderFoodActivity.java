@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.example.test.utils.DataFileAccess;
 import com.example.test.utils.Dish;
 import com.example.test.utils.MyApplication;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -37,6 +39,10 @@ public class OrderFoodActivity extends AppCompatActivity {
     private static String mUserFileName ="UserInfo";//定义SharedPreferences数据文件名称
 
     public ImageButton mImgBtnLogin, mImgBtnLogout;
+
+    //定义一个文件访问工具类对象
+    private DataFileAccess mDataFielAccess = new DataFileAccess(OrderFoodActivity.this);
+
 
     //文件访问对象
     private DataFileAccess mDFA = new DataFileAccess(OrderFoodActivity.this);
@@ -310,15 +316,42 @@ public class OrderFoodActivity extends AppCompatActivity {
         switch (requestCode){
             case REGISTERACTIVITY:
                 if (resultCode== Activity.RESULT_OK){
-                    //获得RegisterActivity封装在intent中的数据
-                    String userid = data.getStringExtra("user");
-                    String userpsd = data.getStringExtra("password");
-                    String userphone = data.getStringExtra("phone");
-                    String useraddress = data.getStringExtra("address");
-                    mAppInstance.g_user.mUserid = userid;
-                    mAppInstance.g_user.mPassword = userpsd;
-                    mAppInstance.g_user.mUserphone = userphone;
-                    mAppInstance.g_user.mUseraddress = useraddress;
+//                    //获得RegisterActivity封装在intent中的数据
+//                    String userid = data.getStringExtra("user");
+//                    String userpsd = data.getStringExtra("password");
+//                    String userphone = data.getStringExtra("phone");
+//                    String useraddress = data.getStringExtra("address");
+//                    mAppInstance.g_user.mUserid = userid;
+//                    mAppInstance.g_user.mPassword = userpsd;
+//                    mAppInstance.g_user.mUserphone = userphone;
+//                    mAppInstance.g_user.mUseraddress = useraddress;
+
+
+                    MyUser userInfo = new MyUser();
+                    String userId = data.getStringExtra("user");
+                    String userPsd = data.getStringExtra("password");
+                    String userAddress = data.getStringExtra("address");
+                    String userPhone = data.getStringExtra("phone");
+
+                    userInfo.mUserid = userId;
+                    userInfo.mPassword = userPsd;
+                    userInfo.mUserphone = userPhone;
+                    userInfo.mUseraddress = userAddress;
+
+                    String fileName = "userinfo.txt";
+                    mDataFielAccess.SaveUserInfotoFile(fileName,userInfo);
+
+                    //从保存的用户信息文件中读入用户信息到全局变量
+
+                    mAppInstance.g_user = mDataFielAccess.ReadUserInfofromFile(fileName);
+                    Log.e("g_user", mAppInstance.g_user.mUserid + mAppInstance.g_user.mPassword);
+                    Toast.makeText(OrderFoodActivity.this,"已保存用户信息并读取",Toast.LENGTH_SHORT).show();
+//                    //将用户数据存放到用户对象中
+//                    myApplication.g_user.mUserId = userId;
+//                    myApplication.g_user.mPassword = userPsd;
+//                    myApplication.g_user.mUserPhone = userPhone;
+//                    myApplication.g_user.mUserAddress = userAddress;
+
                 }
                 break;
             default:break;

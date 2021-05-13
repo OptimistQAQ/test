@@ -60,6 +60,15 @@
         android:textSize="20sp"
         tools:ignore="HardcodedText" />
 
+    <Button
+        android:id="@+id/sql_lite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SqlLite数据库"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        tools:ignore="HardcodedText" />
+
 
 
 </LinearLayout>

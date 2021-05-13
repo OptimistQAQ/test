@@ -15,6 +15,7 @@ import com.example.test.activity.OrderFoodActivity;
 import com.example.test.activity.TextActivity;
 import com.example.test.activity.chaundi.ChuandiActivity;
 import com.example.test.activity.data.SharedPreferencesActivity;
+import com.example.test.activity.sqllitedemo.SqlLiteDemoActivity;
 import com.example.test.activity.url.UrlActivity;
 
 /**
@@ -24,6 +25,7 @@ import com.example.test.activity.url.UrlActivity;
 public class MainActivity extends AppCompatActivity {
 
     private Button text_Button, order_Food, btn_url, btn_Chuandi, bt_dialog, bt_share;
+    private Button bt_sql_lite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,14 @@ public class MainActivity extends AppCompatActivity {
         btn_Chuandi = (Button) findViewById(R.id.chuandi);
         bt_dialog = (Button) findViewById(R.id.dialog);
         bt_share = (Button) findViewById(R.id.share);
+        bt_sql_lite = (Button)findViewById(R.id.sql_lite);
+        bt_sql_lite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sqlLiteIntent = new Intent(MainActivity.this, SqlLiteDemoActivity.class);
+                startActivity(sqlLiteIntent);
+            }
+        });
         text_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
