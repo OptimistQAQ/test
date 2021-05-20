@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.test.R;
 import com.example.test.bean.People;
@@ -78,6 +80,9 @@ public class SqlLiteDemoActivity extends Activity {
                 labelView.setText("添加过程错误！");
             } else {
                 labelView.setText("成功添加数据，ID："+String.valueOf(colunm));
+                nameText.setText("");
+                ageText.setText("");
+                heightText.setText("");
 
             }
         }
@@ -89,6 +94,7 @@ public class SqlLiteDemoActivity extends Activity {
             People[] peoples = dbAdepter.queryAllData();
             if (peoples == null){
                 labelView.setText("数据库中没有数据");
+                displayView.setText("");
                 return;
             }
             labelView.setText("数据库：");
@@ -114,49 +120,68 @@ public class SqlLiteDemoActivity extends Activity {
             dbAdepter.deleteAllData();
             String msg = "数据全部删除";
             labelView.setText(msg);
+            displayView.setText("");
         }
     };
 
     View.OnClickListener queryButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            int id = Integer.parseInt(idEntry.getText().toString());
-            People[] peoples = dbAdepter.queryOneData(id);
+            try {
+                int id = Integer.parseInt(idEntry.getText().toString());
+                People[] peoples = dbAdepter.queryOneData(id);
 
-            if (peoples == null){
-                labelView.setText("数据库中没有ID为"+String.valueOf(id)+"的数据");
-                return;
+                if (peoples == null){
+                    labelView.setText("数据库中没有ID为"+String.valueOf(id)+"的数据");
+                    return;
+                }
+                labelView.setText("数据库：");
+                displayView.setText(peoples[0].toString());
+            } catch (Exception e) {
+                Toast.makeText(SqlLiteDemoActivity.this, "ID不能为空", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
             }
-            labelView.setText("数据库：");
-            displayView.setText(peoples[0].toString());
+
         }
     };
 
     View.OnClickListener deleteButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            long id = Integer.parseInt(idEntry.getText().toString());
-            long result = dbAdepter.deleteOneData(id);
-            String msg = "删除ID为"+idEntry.getText().toString()+"的数据" + (result>0?"成功":"失败");
-            labelView.setText(msg);
+            try {
+                long id = Integer.parseInt(idEntry.getText().toString());
+                long result = dbAdepter.deleteOneData(id);
+                String msg = "删除ID为"+idEntry.getText().toString()+"的数据" + (result>0?"成功":"失败");
+                labelView.setText(msg);
+            } catch (Exception e) {
+                Toast.makeText(SqlLiteDemoActivity.this, "ID不能为空", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
         }
     };
 
     View.OnClickListener updateButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            People people = new People();
-            people.Name = nameText.getText().toString();
-            people.Age = Integer.parseInt(ageText.getText().toString());
-            people.Height = Float.parseFloat(heightText.getText().toString());
-            long id = Integer.parseInt(idEntry.getText().toString());
-            long count = dbAdepter.updateOneData(id, people);
-            if (count == -1 ){
-                labelView.setText("更新错误！");
-            } else {
-                labelView.setText("更新成功，更新数据"+String.valueOf(count)+"条");
+            try {
+                People people = new People();
+                people.Name = nameText.getText().toString();
+                people.Age = Integer.parseInt(ageText.getText().toString().trim());
+                people.Height = Float.parseFloat(heightText.getText().toString().trim());
+                Log.e("id", idEntry.getText().toString().trim());
+                long id = Integer.parseInt(idEntry.getText().toString().trim());
+                long count = dbAdepter.updateOneData(id, people);
+                if (count == -1 ){
+                    labelView.setText("更新错误！");
+                } else {
+                    labelView.setText("更新成功，更新数据"+String.valueOf(count)+"条");
 
+                }
+            } catch (Exception e) {
+                Toast.makeText(SqlLiteDemoActivity.this, "ID不能为空", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
             }
+
         }
     };
 

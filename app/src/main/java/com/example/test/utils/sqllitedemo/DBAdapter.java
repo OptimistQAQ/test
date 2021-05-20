@@ -104,6 +104,9 @@ public class DBAdapter {
 	  }
 	  
 	  public long deleteAllData() {
+		  db.execSQL(
+				  "update sqlite_sequence set seq=0 where name='peopleinfo'"
+		  );
 		  return db.delete(DB_TABLE, null, null);
 	  }
 
