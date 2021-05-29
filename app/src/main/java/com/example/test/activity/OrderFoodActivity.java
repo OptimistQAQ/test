@@ -62,7 +62,7 @@ public class OrderFoodActivity extends AppCompatActivity {
             mAppInstance.g_user = new MyUser(); //读入失败则创建新用户
         }
         mAppInstance.g_orders = new ArrayList<Order>();//创建订单列表
-        CopyDishImagesFromRawToSD(); //将RAW文件夹中的菜品图像复制到SD卡的指定文件夹中
+//        CopyDishImagesFromRawToSD(); //将RAW文件夹中的菜品图像复制到SD卡的指定文件夹中
 
         mAppInstance.g_dbAdepter = new DBAdapter(this);
         mAppInstance.g_dbAdepter.open();
@@ -120,7 +120,8 @@ public class OrderFoodActivity extends AppCompatActivity {
 
     private ArrayList<Dish> FillDishesList() {
 
-        String imgPath = mDFA.SDCardPath() + "/" + mAppInstance.g_imgDishImgPath + "/";
+//        String imgPath = mDFA.SDCardPath() + "/" + mAppInstance.g_imgDishImgPath + "/";
+        String imgPath = "/data/data/com.example.test/";
         ArrayList<Dish> theDishesList = new ArrayList<Dish>();
         Dish theDish = new Dish();
         //添加菜品

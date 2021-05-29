@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.test">
+
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -16,7 +17,13 @@
         android:roundIcon="@drawable/main"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.sqllitedemo.SqlLiteDemoActivity"></activity>
+        <service
+            android:name=".activity.music.MusicService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity android:name=".activity.music.MusicActivity" />
+        <activity android:name=".activity.sqllitedemo.SqlLiteDemoActivity" />
         <activity android:name=".activity.data.SharedPreferencesActivity" />
         <activity android:name=".activity.chaundi.CaculateActivity" />
         <activity android:name=".activity.chaundi.ChuandiActivity" />

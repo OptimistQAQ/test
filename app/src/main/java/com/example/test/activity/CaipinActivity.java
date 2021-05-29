@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,10 +37,17 @@ public class CaipinActivity extends AppCompatActivity {
         setContentView(R.layout.activity_caipin);
 
         mlistview = (ListView) findViewById(R.id.ListViewCainpin);
-        mfoodinfo=getFoodData();
+        //mfoodinfo = getFoodData();
+
+        MyApplication myApplication = (MyApplication) getApplication();
+        //从数据库中得到数据源
+        mfoodinfo = myApplication.g_dbAdepter.getDishData();
+        Log.e("123", mfoodinfo.toString());
         //构造SimpleAdapter适配器，将它和自定义的布局文件、List数据源关联
-        mlistItemAdapter = new SimpleAdapter(this,mfoodinfo,//数据源
-                R.layout.listitem,//ListItem的XML实现
+        //数据源
+        //ListItem的XML实现
+        mlistItemAdapter = new SimpleAdapter(this,mfoodinfo,
+                R.layout.listitem,
                 //动态数组与ImageItem对应的子项
                 new String[] {"dishid", "image","title", "price", "order"},
                 //ImageItem的XML文件里面的1个ImageView,3个TextView ID

@@ -15,6 +15,7 @@ import com.example.test.activity.OrderFoodActivity;
 import com.example.test.activity.TextActivity;
 import com.example.test.activity.chaundi.ChuandiActivity;
 import com.example.test.activity.data.SharedPreferencesActivity;
+import com.example.test.activity.music.MusicActivity;
 import com.example.test.activity.sqllitedemo.SqlLiteDemoActivity;
 import com.example.test.activity.url.UrlActivity;
 
@@ -25,7 +26,7 @@ import com.example.test.activity.url.UrlActivity;
 public class MainActivity extends AppCompatActivity {
 
     private Button text_Button, order_Food, btn_url, btn_Chuandi, bt_dialog, bt_share;
-    private Button bt_sql_lite;
+    private Button bt_sql_lite, music_player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
         bt_dialog = (Button) findViewById(R.id.dialog);
         bt_share = (Button) findViewById(R.id.share);
         bt_sql_lite = (Button)findViewById(R.id.sql_lite);
+        music_player = (Button) findViewById(R.id.music_player);
+        music_player.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent musicIntent = new Intent(MainActivity.this, MusicActivity.class);
+                startActivity(musicIntent);
+            }
+        });
         bt_sql_lite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

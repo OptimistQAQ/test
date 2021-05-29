@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.util.Log;
 
 public class DBAdapter {
 
@@ -100,11 +101,12 @@ public class DBAdapter {
 			  theDish.mId = cursor.getInt(0);
 			  theDish.mName = cursor.getString(cursor.getColumnIndex(KEY_NAME));
 			  theDish.mImageName = cursor.getString(cursor.getColumnIndex(KEY_IMGNAME));
+			  Log.e("456", theDish.mImageName);
 			  theDish.mPrice = cursor.getFloat(cursor.getColumnIndex(KEY_PRICE));
 			  dishes.add(theDish);
 			  
 			  cursor.moveToNext();
-		  }	  
+		  }
 		  return dishes; 
 	  }
 	  

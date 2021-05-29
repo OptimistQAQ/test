@@ -69,6 +69,15 @@
         android:textSize="20sp"
         tools:ignore="HardcodedText" />
 
+    <Button
+        android:id="@+id/music_player"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="音乐播放器"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        tools:ignore="HardcodedText" />
+
 
 
 </LinearLayout>
